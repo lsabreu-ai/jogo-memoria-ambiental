@@ -1,7 +1,7 @@
-name = "jogo-memoria-static"
-compatibility_date = "2025-05-26"
-main = "./index.html"  # Força o reconhecimento como HTML estático
+name = "jogo-memoria-assets"
+type = "webpack"
+compatibility_date = "2025-05-27"
 
 [site]
-bucket = "./"          # Diretório raiz
-entry-point = "./"     # Ponto de entrada
+bucket = "./"
+entry-point = "./"
