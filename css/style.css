@@ -1,0 +1,561 @@
+/* Estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #e8f5e9;
+    background-image: radial-gradient(#a5d6a7 2px, transparent 2px);
+    background-size: 30px 30px;
+    color: #2e7d32;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #2e7d32;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.score-container {
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.game-container {
+    margin: 20px 0;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.card {
+    aspect-ratio: 1 / 1;
+    perspective: 1000px;
+    cursor: pointer;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-front {
+    background-color: #81c784;
+    background-image: linear-gradient(45deg, #81c784 25%, transparent 25%, transparent 75%, #81c784 75%, #81c784),
+                      linear-gradient(45deg, #81c784 25%, transparent 25%, transparent 75%, #81c784 75%, #81c784);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+}
+
+.card-back {
+    background-color: #fff;
+    transform: rotateY(180deg);
+    padding: 10px;
+}
+
+.card-back img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.card.matched {
+    animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-small {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-small:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px);
+}
+
+.btn-small:active {
+    transform: translateY(0);
+}
+
+.message-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.message-box.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.message-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 80%;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.message-content p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.congratulations {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.congratulations.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.congratulations-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 80%;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.congratulations-content h2 {
+    color: #2e8b57;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.congratulations-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.eco-tip {
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 20px 0;
+    border-left: 5px solid #4caf50;
+}
+
+.eco-tip h3 {
+    color: #2e8b57;
+    margin-bottom: 10px;
+}
+
+.eco-tip p {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #81c784;
+    color: white;
+}
+
+/* Estilos para o ranking */
+.ranking-button {
+    background-color: #ff9800;
+    margin-left: 10px;
+}
+
+.ranking-button:hover {
+    background-color: #f57c00;
+}
+
+.ranking-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.ranking-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ranking-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 80%;
+    width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ranking-content h2 {
+    color: #ff9800;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.ranking-list {
+    list-style: none;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.ranking-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.1rem;
+}
+
+.ranking-list li:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+.ranking-list li:first-child {
+    background-color: #fff9c4;
+    font-weight: bold;
+}
+
+.ranking-list li:nth-child(2) {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.ranking-list li:nth-child(3) {
+    background-color: #ffecb3;
+    font-weight: bold;
+}
+
+.ranking-position {
+    width: 30px;
+    font-weight: bold;
+    color: #ff9800;
+}
+
+.ranking-name {
+    flex-grow: 1;
+    padding: 0 10px;
+}
+
+.ranking-time {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.ranking-date {
+    font-size: 0.9rem;
+    color: #757575;
+    margin-left: 10px;
+}
+
+/* Estilos para o formulário de nome */
+.name-form {
+    margin: 20px 0;
+}
+
+.name-form input {
+    padding: 10px 15px;
+    border: 2px solid #4caf50;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 15px;
+}
+
+.name-form input:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Estilos para o painel de administração */
+.admin-button {
+    background-color: #f44336;
+    margin-left: 10px;
+}
+
+.admin-button:hover {
+    background-color: #d32f2f;
+}
+
+.admin-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.admin-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.admin-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 80%;
+    width: 600px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.admin-content h2 {
+    color: #f44336;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.admin-list {
+    list-style: none;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.admin-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.1rem;
+}
+
+.admin-list li:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+.admin-info {
+    flex-grow: 1;
+}
+
+.admin-remove {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.admin-remove:hover {
+    background-color: #d32f2f;
+}
+
+.admin-login {
+    margin: 20px 0;
+}
+
+.admin-login input {
+    padding: 10px 15px;
+    border: 2px solid #f44336;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 15px;
+}
+
+.admin-login input:focus {
+    outline: none;
+    border-color: #d32f2f;
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.5);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .game-board {
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .score-container {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .score, .timer {
+        margin: 5px 0;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .message-content, .congratulations-content, .ranking-content, .admin-content {
+        padding: 20px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-board {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .message-content p, .congratulations-content p {
+        font-size: 1rem;
+    }
+    
+    .eco-tip p {
+        font-size: 0.9rem;
+    }
+    
+    .ranking-list li, .admin-list li {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+}
