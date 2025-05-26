@@ -1,0 +1,7 @@
+name = "jogo-memoria-static"
+compatibility_date = "2025-05-26"
+main = "./index.html"  # Força o reconhecimento como HTML estático
+
+[site]
+bucket = "./"          # Diretório raiz
+entry-point = "./"     # Ponto de entrada
