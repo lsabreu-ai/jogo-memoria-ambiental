@@ -1,6 +1,6 @@
-name = "jogo-memoria-assets"
-type = "webpack"
+name = "jogo-memoria-ambiental"
 compatibility_date = "2025-05-27"
+main = "./index.html"
 
 [site]
 bucket = "./"
